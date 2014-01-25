@@ -1,11 +1,7 @@
 $(function() {
 
-    loadInfos("GTFS/routes_additionals.txt").done(function(data){
+    loadInfos("GTFS/stops.txt").done(function(data){
         data = parseGTFS(data);
-        // console.log(data);
-        // console.log(data[0]); // headers
-        // console.log(data[1]); // premiere occurence
-        // console.log(data[1]['route_desc']); // route_desc de la premiere occurence
     });
 
 });
