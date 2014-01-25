@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:gtfs="http://data.keolis-rennes.com/fileadmin/OpenDataFiles/GTFS/feed/1.0">
+  <title>Keolis Rennes - Données théoriques GTFS des lignes de bus du réseau STAR</title>
+  <id>http://data.keolis-rennes.com/fileadmin/OpenDataFiles/GTFS/feed</id>
+  <link href="http://data.keolis-rennes.com/fileadmin/OpenDataFiles/GTFS/feed" type="application/atom+xml" rel="self"/>
+  <link href="http://data.keolis-rennes.com/fr/les-donnees/donnees-telechargeables.html" type="text/html" rel="alternate"/>
+  <author>
+    <name>Keolis Rennes</name>
+  </author>
+  <updated>2013-12-20T09:36:27+01:00</updated>
+  <gtfs:lang>FR</gtfs:lang>
+  <entry>
+    <id>cid:GTFS-20131031</id>
+    <title type="text">Mise à jour GTFS</title>
+    <content type="html"><![CDATA[<p> Horaires d'hiver 2013/2014 - Version 3.0 - Novembre / Décembre (valables du 04/11/2013 au 22/12/2013)</p>]]></content>
+    <link href="http://data.keolis-rennes.com/fileadmin/OpenDataFiles/GTFS/GTFS-20131031.zip" type="application/zip" rel="enclosure" title="GTFS-20131031.zip" length="2884969"/>
+    <link href="http://data.keolis-rennes.com/fr/les-donnees/donnees-telechargeables.html" type="text/html" rel="alternate"/>
+    <updated>2013-10-31T10:02:47+01:00</updated>
+    <published>2013-10-31T10:02:47+01:00</published>
+    <gtfs:start>2013-11-04</gtfs:start>
+    <gtfs:end>2013-12-22</gtfs:end>
+    <gtfs:version>Horaires d'hiver 2013/2014 - Version 3.0 - Novembre / Décembre</gtfs:version>
+  </entry>
+  <entry>
+    <id>cid:GTFS-20131216</id>
+    <title type="text">Mise à jour GTFS</title>
+    <content type="html"><![CDATA[<p> Horaires d'hiver 2013/2014 - Version 4.0 - Vacances de Noël (valables du 23/12/2013 au 05/01/2014)</p>]]></content>
+    <link href="http://data.keolis-rennes.com/fileadmin/OpenDataFiles/GTFS/GTFS-20131216.zip" type="application/zip" rel="enclosure" title="GTFS-20131216.zip" length="3053561"/>
+    <link href="http://data.keolis-rennes.com/fr/les-donnees/donnees-telechargeables.html" type="text/html" rel="alternate"/>
+    <updated>2013-12-16T16:24:20+01:00</updated>
+    <published>2013-12-16T16:24:20+01:00</published>
+    <gtfs:start>2013-12-23</gtfs:start>
+    <gtfs:end>2014-01-05</gtfs:end>
+    <gtfs:version>Horaires d'hiver 2013/2014 - Version 4.0 - Vacances de Noël</gtfs:version>
+  </entry>
+  <entry>
+    <id>cid:GTFS-20131220</id>
+    <title type="text">Mise à jour GTFS</title>
+    <content type="html"><![CDATA[<p> Horaires d'hiver 2013/2014 - Version 5.0 - Janvier/Février (valables du 06/01/2014 au 02/03/2014)</p>]]></content>
+    <link href="http://data.keolis-rennes.com/fileadmin/OpenDataFiles/GTFS/GTFS-20131220.zip" type="application/zip" rel="enclosure" title="GTFS-20131220.zip" length="2827242"/>
+    <link href="http://data.keolis-rennes.com/fr/les-donnees/donnees-telechargeables.html" type="text/html" rel="alternate"/>
+    <updated>2013-12-20T09:36:27+01:00</updated>
+    <published>2013-12-20T09:36:27+01:00</published>
+    <gtfs:start>2014-01-06</gtfs:start>
+    <gtfs:end>2014-03-02</gtfs:end>
+    <gtfs:version>Horaires d'hiver 2013/2014 - Version 5.0 - Janvier/Février</gtfs:version>
+  </entry>
+</feed>
