@@ -11,10 +11,6 @@ header h1 {
     text-align:center;
 }
 
-nav {
-    padding:1em;
-}
-
 #map-canvas {
-    height:400px;
+    height:450px;
 }
