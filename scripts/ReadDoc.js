@@ -1,7 +1,19 @@
+$(function() {
+
+	loadInfos("GTFS/stop_times.txt").done(function(data){
+		console.log(typeof data);
+	});
+	
+	$("#infos_passage").append(dataTime.toSource());
+
+});
+
+
 // Load file
-function getFile(file)
+function loadInfos(file)
 {
     var infos = $.get(file, function(data) {
+
 
         var result = new Array(); // My list of table
         var listItem = new Array(); // My item list
@@ -15,6 +27,7 @@ function getFile(file)
             {
                 $.each(d.split(','), function(j, item) {
                     listItem.push(item);
+					
                 });
 
             }
@@ -25,6 +38,7 @@ function getFile(file)
                     //list.push(detail);
                     var col = listItem[j]; 
                     list[col] = detail;
+					
 
                 });
                 result.push(list);
@@ -32,6 +46,6 @@ function getFile(file)
         });
         return result;
     });
-    
+
     return infos;
 }
