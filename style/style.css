@@ -1,0 +1,20 @@
+
+header {
+    display:block;
+    background-color:#006F86;
+    padding:.5em 0;
+}
+
+header h1 {
+    color:#F4F4F4;
+    font-size:2em;
+    text-align:center;
+}
+
+nav {
+    padding:1em;
+}
+
+#map-canvas {
+    height:400px;
+}
