@@ -1,5 +1,5 @@
 // Load file
-function LoadInfos(file)
+function getFile(file)
 {
     var infos = $.get(file, function(data) {
 
@@ -34,8 +34,4 @@ function LoadInfos(file)
     });
     
     return infos;
-}
-
-function getFile(file) {
-    return LoadInfos('GTFS/routes_additionals.txt');
 }
