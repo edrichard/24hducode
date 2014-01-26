@@ -11,13 +11,12 @@ function showArreteMarker() {
         data = parseGTFS(data);
 
         $.each(data, function(index, value) {
-            console.log(value['stop_lat']);
-            console.log(value['stop_lon']);
+            
             var myLatlng = new google.maps.LatLng(value['stop_lat'], value['stop_lon']);
             new google.maps.Marker({
                 position : myLatlng,
-                map : map,
-                title : 'Hello World!'
+                map: map,
+                title: 'Arrêt de bus'
             });
 
         });
@@ -43,6 +42,7 @@ function initialize() {
             var pos = new google.maps.LatLng(48.103648, -1.672379);
             //var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
+            
             var infowindow = new google.maps.InfoWindow({
                 map : map,
                 position : pos,
