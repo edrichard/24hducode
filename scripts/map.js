@@ -1,6 +1,12 @@
 $(function() {
+
+    // Google map sur tout l'écran disponible
+    var height_map = $(window).height() - ($('header').height()); // hauteur écran - hauteur titre
+    $('#map-canvas').css('height', height_map);
+
     initialize();
     showArreteMarker();
+    setZoom(16);
 });
 
 var map;
@@ -43,26 +49,33 @@ function showArreteMarker() {
 		google.maps.event.addListener(marker, 'click', function() {
 			infowindow.open(map,marker);
 		});
-			
-
-			
     });
 });
 }
 
+
 function modif_content(data){
+	infowindow.setContent(data);
+}
 
-			infowindow.setContent(data);
-
-}	
+function setZoom(zoom) {
+    google.maps.event.addListener(map, 'zoom_changed', function() {
+        map.setZoom(zoom);
+        map.setCenter(marker.getPosition());
+    });
+}
 
 function initialize() {
     var mapOptions = {
-        zoom : 10
+        zoom: 16
     };
     map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
-    var pos = new google.maps.LatLng(48.103648, -1.672379);
+    // HTML5 geolocation
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = new google.maps.LatLng(48.103648, -1.672379);
+            //var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
     var infowindow = new google.maps.InfoWindow({
         map : map,
@@ -70,57 +83,16 @@ function initialize() {
         content : 'Vous êtes ici.'
     });
 	
-
-
-	
-	
     map.setCenter(pos);
-
-    // Try HTML5 geolocation
-    /*if (navigator.geolocation) {
-     navigator.geolocation.getCurrentPosition(function(position) {
-     var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-
-     var infowindow = new google.maps.InfoWindow({
-     map : map,
-     position : pos,
-     content : 'Vous êtes ici.'
-     });
-
-     map.setCenter(pos);
+	
      }, function() {
      handleNoGeolocation(true);
      });
      } else {
      // Browser doesn't support Geolocation
      handleNoGeolocation(false);
-     }*/
-			 // var dateNow = new Date().getTime();
-			
-			// Récupération de l'heure du départ du bus de l'arrêt
-			 // var heureDepBus = "05:46:00";
-			
-			// Récupération de la date pour  la comparaison
-			 // var jourSemDep = new Date().getDate();
-			 // var moisDateDep = new Date().getMonth();
-			 // var nomJourDateDep = new Date().getDay();
-			 // var anneeDateDep = new Date().getFullYear();
-			
-			// var dateDep = jourSemDep+','+moisDateDep+' '+nomJourDateDep+' '+anneeDateDep+' '+heureDepBus;
-			
-			// Parsage en timestamp
-			// / var dateDepTM = new Date(anneeDateDep, moisDateDep, jourSemDep ).getTime();
-			// var dateDepTm = var Date(dateDep).getTime();
-			
-			// console.log(dateDepTM);
-	
-		// var mapBodyContent = document.getElementById('#bodyContent');
-		// console.log(mapBodyContent);
-		 // google.maps.event.addListener(mapBodyContent, 'click', function(){
-			// infowindow.setContent("tralalala");
-         // });
-	
-	
+     }
+	 
 }
 
 function handleNoGeolocation(errorFlag) {
@@ -131,14 +103,14 @@ function handleNoGeolocation(errorFlag) {
     }
 
     var options = {
-        map : map,
-        position : new google.maps.LatLng(60, 105),
-        content : content
+        map: map,
+        position: new google.maps.LatLng(60, 105),
+        content: content
     };
-
     var infowindow = new google.maps.InfoWindow(options);
     map.setCenter(options.position);
 }
+
 
 function loadTrips(stop_id)
 {
@@ -163,8 +135,31 @@ function loadTrips(stop_id)
 
 }
 
-function compareDate(date1, date2){
-	
+
+// Fonction permettant de savoir si l'heure passée en paramètre est déjà passée, ou pas.
+// Paramètre : myTime : Fichier String du type "HH:MM:SS"
+// Retourne true si l'heure passée en paramètre est déjà passée, et retourne false si l'heure passée en paramètre est déjà passée
+function compareTime(myTime)
+{
+    // Récupération de ma date et mon heure actuelle
+    now = new Date();
+    // Récupération de la date et du jour actuel
+    myDate = new Date();
+    
+    var elem = myTime.split(':');
+    // Ajout de l'heure à myDate
+    myDate.setHours(elem[0]);
+    // Ajout des minutes
+    myDate.setMinutes(elem[1]);
+  
+    //Comparaison
+    if (myDate.getTime() > now.getTime())
+    {
+        // Ce bus n'est pas encore passé
+        return true
+    }
+    else
+    {
+        return false
+    }
 }
-
-

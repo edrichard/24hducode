@@ -1,12 +1,3 @@
-$(function() {
-
-    loadInfos("GTFS/stops.txt").done(function(data){
-        data = parseGTFS(data);
-    });
-
-});
-
-
 function parseGTFS(data) {
     var result = new Array(); // My list of table
     var listItem = new Array(); // My item list
