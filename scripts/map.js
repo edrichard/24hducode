@@ -1,9 +1,27 @@
 $(function() {
     initialize();
+    showArreteMarker();
 });
 
-
 var map;
+
+function showArreteMarker() {
+    loadInfos("GTFS/stops.txt").done(function(data) {
+        data = parseGTFS(data);
+
+        $.each(data, function(index, value) {
+            console.log(value['stop_lat']);
+            console.log(value['stop_lon']);
+            var myLatlng = new google.maps.LatLng(value['stop_lat'], value['stop_lon']);
+            new google.maps.Marker({
+                position : myLatlng,
+                map : map,
+                title : 'Hello World!'
+            });
+
+        });
+    });
+}
 
 function initialize() {
     var mapOptions = {
@@ -11,25 +29,35 @@ function initialize() {
     };
     map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
+    var pos = new google.maps.LatLng(48.103648, -1.672379);
+
+    var infowindow = new google.maps.InfoWindow({
+        map : map,
+        position : pos,
+        content : 'Vous êtes ici.'
+    });
+    
+    map.setCenter(pos);
+
     // Try HTML5 geolocation
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-            var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+    /*if (navigator.geolocation) {
+     navigator.geolocation.getCurrentPosition(function(position) {
+     var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
-            var infowindow = new google.maps.InfoWindow({
-                map : map,
-                position : pos,
-                content : 'Vous êtes ici.'
-            });
+     var infowindow = new google.maps.InfoWindow({
+     map : map,
+     position : pos,
+     content : 'Vous êtes ici.'
+     });
 
-            map.setCenter(pos);
-        }, function() {
-            handleNoGeolocation(true);
-        });
-    } else {
-        // Browser doesn't support Geolocation
-        handleNoGeolocation(false);
-    }
+     map.setCenter(pos);
+     }, function() {
+     handleNoGeolocation(true);
+     });
+     } else {
+     // Browser doesn't support Geolocation
+     handleNoGeolocation(false);
+     }*/
 }
 
 function handleNoGeolocation(errorFlag) {
