@@ -1,4 +1,9 @@
 $(function() {
+    
+    // Google map sur tout l'écran disponible
+    var height_map = $(window).height() - ($('header').height()); // hauteur écran - hauteur titre
+    $('#map-canvas').css('height', height_map);
+    
     initialize();
     showArreteMarker();
     setZoom(16);
