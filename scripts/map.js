@@ -11,6 +11,7 @@ $(function() {
 
 var map;
 
+// Fonction permettant d'afficher les différents arrêts sur la map
 function showArreteMarker() {
     loadInfos("GTFS/stops.txt").done(function(data) {
         data = parseGTFS(data);
@@ -27,6 +28,7 @@ function showArreteMarker() {
     });
 }
 
+// Fonction permettant la défintion du zoom de la carte
 function setZoom(zoom) {
     google.maps.event.addListener(map, 'zoom_changed', function() {
         map.setZoom(zoom);
@@ -34,6 +36,7 @@ function setZoom(zoom) {
     });
 }
 
+// Fonction permettant le chargement de la map Google.
 function initialize() {
     var mapOptions = {
         zoom: 16
@@ -63,6 +66,7 @@ function initialize() {
     }
 }
 
+// FOnction appelée si il n'y a pas de géolocalisation d'activée
 function handleNoGeolocation(errorFlag) {
     if (errorFlag) {
         var content = 'Erreur : Le service de géolocalisation n\'est pas disponible.';
@@ -99,10 +103,10 @@ function compareTime(myTime)
     if (myDate.getTime() > now.getTime())
     {
         // Ce bus n'est pas encore passé
-        return true
+        return true;
     }
     else
     {
-        return false
+        return false;
     }
 }
