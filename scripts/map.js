@@ -10,6 +10,7 @@ $(function() {
 });
 
 var map;
+var infowindow;
 
 // Fonction permettant d'afficher les différents arrêts sur la map
 function showArreteMarker() {
@@ -17,15 +18,45 @@ function showArreteMarker() {
         data = parseGTFS(data);
 
         $.each(data, function(index, value) {
-
+           // console.log(value['stop_lat']);
+           
             var myLatlng = new google.maps.LatLng(value['stop_lat'], value['stop_lon']);
-            new google.maps.Marker({
-                position: myLatlng,
-                map: map,
-                title: 'Arrêt de bus'
+            var marker = new google.maps.Marker({
+                position : myLatlng,
+                map : map,
+                title : value['stop_name']
             });
-        });
+			
+
+			//var nom = "Le nom de l'arret est :"+value['stop_name']+"!!!!";
+	console.log(value['stop_id']);
+			var contentString = '<div id="content">'+
+				  '<div id="siteNotice">'+
+				  '</div>'+
+				  '<h1 id="firstHeading" class="firstHeading">Nom de l\'arret</h1>'+
+				  '<div id="bodyContent" onclick="loadTrips('+value['stop_id']+')">'+
+				  'pfhqpqpirubgfmqufbgpqudvn^qoruihgùsivhnqrihvùgsirhvqmruhglqduhvlgdfubvqmrunhvsfdvnqmrqfuvbqruvbqruvbqsmruvmr<hmsdigqmruhgfigq^rhgiifghsroh'+
+				  '</div>'+
+				  '</div>';
+
+	   
+	   
+
+	  
+		 infowindow = new google.maps.InfoWindow({
+			  content: contentString
+		  });
+		  
+		google.maps.event.addListener(marker, 'click', function() {
+			infowindow.open(map,marker);
+		});
     });
+});
+}
+
+
+function modif_content(data){
+	infowindow.setContent(data);
 }
 
 // Fonction permettant la défintion du zoom de la carte
@@ -46,24 +77,25 @@ function initialize() {
     // HTML5 geolocation
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
-            //var pos = new google.maps.LatLng(48.103648, -1.672379);
-            var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+            var pos = new google.maps.LatLng(48.103648, -1.672379);
+            //var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
-
-            var infowindow = new google.maps.InfoWindow({
-                map: map,
-                position: pos,
-                content: 'Vous êtes ici.'
-            });
-
-            map.setCenter(pos);
-        }, function() {
-            //handleNoGeolocation(true);
-        });
-    } else {
-        // Browser doesn't support Geolocation
-        handleNoGeolocation(false);
-    }
+    var infowindow = new google.maps.InfoWindow({
+        map : map,
+        position : pos,
+        content : 'Vous êtes ici.'
+    });
+	
+    map.setCenter(pos);
+	
+     }, function() {
+     handleNoGeolocation(true);
+     });
+     } else {
+     // Browser doesn't support Geolocation
+     handleNoGeolocation(false);
+     }
+	 
 }
 
 // FOnction appelée si il n'y a pas de géolocalisation d'activée
@@ -82,6 +114,31 @@ function handleNoGeolocation(errorFlag) {
     var infowindow = new google.maps.InfoWindow(options);
     map.setCenter(options.position);
 }
+
+
+function loadTrips(stop_id)
+{
+ loadInfos("GTFS/stop_times.txt").done(function(data) {
+        data = parseGTFS(data);
+
+        $.each(data, function(index, value) {
+
+		
+			if(value['stop_id'] == stop_id)
+			{
+				var mesDatas = "<p>Prochains départs : "+value['arrival_time']+"</p>";
+				console.log(value['arrival_time']);
+				modif_content(mesDatas);
+			}
+			
+			
+           
+
+        });
+    });
+
+}
+
 
 // Fonction permettant de savoir si l'heure passée en paramètre est déjà passée, ou pas.
 // Paramètre : myTime : Fichier String du type "HH:MM:SS"
