@@ -65,7 +65,7 @@ function initialize() {
     var pos = new google.maps.LatLng(48.103648, -1.672379);
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
-            //pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+            pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
             var infowindow = new google.maps.InfoWindow({
                 map : map,

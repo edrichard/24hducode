@@ -5,5 +5,10 @@
   "icons": {
     "128": "/img/logo_128.png"
   },
-  "default_locale": "fr"
+  "default_locale": "fr",
+   "permissions": {
+		"geolocation": {
+		  "description": "Geo Location"
+		}
+	}
 }
