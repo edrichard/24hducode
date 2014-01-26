@@ -1,12 +1,15 @@
+// FOnction permettant de parser un fichier .txt sous la norme GTFS
+// Paramètre data : Lien vers le fichier .txt
+// Retourne une liste de tableaux correspondant à chaque ligne
 function parseGTFS(data) {
     var result = new Array(); // My list of table
     var listItem = new Array(); // My item list
     var list; // My list of details
     
-    // Foreach lign...
+    // Traitement pour chaque ligne du fichier
     $.each(data.split('\n'), function(i, d) {
         
-        // If it's my first lign with my list of id
+        // Permet de récuperer les en-têtes
         if (i == 0)
         {
             $.each(d.split(','), function(j, item) {
@@ -14,7 +17,8 @@ function parseGTFS(data) {
             });
 
         }
-        else
+        // Permet de récuperer les valeurs
+        else 
         {
             list = {};
             $.each(d.split('","'), function(j, detail) {
@@ -30,7 +34,7 @@ function parseGTFS(data) {
 }
 
 
-// Load file
+// Permet le chargement du fichier en ajax
 function loadInfos(file)
 {
     return $.get(file);
